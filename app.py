@@ -65,6 +65,13 @@ def telegram_webhook():
         return 'OK', 200
     elif message_text.lower() == "/quit":
         requests.get(url + f'sendMessage?chat_id={chat_id}&text=Good%20Bye!')
+
+        # Remove the webhook
+        delete_webhook_url = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/deleteWebhook'
+        response = requests.post(
+            delete_webhook_url,
+            json={'url': WEBHOOK_URL, 'drop_pending_updates': True}
+        )
         return 'OK', 200
     else:
         # show "typing..."
