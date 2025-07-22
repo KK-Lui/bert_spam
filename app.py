@@ -21,11 +21,16 @@ encoder = joblib.load("vector.pkl")  # Load the encoder
 model = joblib.load("new_lr_model.pkl")
 
 # message_text = "Had your mobile 11 months or more? U R entitled to Update to the latest colour mobiles with camera for Free! Call The Mobile Update Co FREE on 08002986030"
-# # run classification
+# message_text = "Greetings"
+# run classification
 # X_emb = encoder.transform([message_text])
 # print(X_emb.shape)
 # pred = model.predict(X_emb)
-# print(pred)
+# print(message_text, pred)
+# if pred==[1]:
+#    print('Spam')
+# else:
+#    print('Not Spam')
 
 # === Flask Application Setup ===
 
@@ -82,7 +87,7 @@ def telegram_webhook():
         X_emb = encoder.transform([message_text])
         pred = model.predict(X_emb)
 
-        if pred=="ham":
+        if pred==[0]:
             result = "Not Spam"
         else:
             result = "Spam"
