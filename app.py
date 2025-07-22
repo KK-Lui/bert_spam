@@ -16,9 +16,9 @@ url = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/'
 WEBHOOK_URL = os.getenv('WEBHOOK_URL')
 
 # === prepare classifier ===
-encoder = joblib.load("cv_encoder.pkl")  # Load the encoder
+encoder = joblib.load("vector.pkl")  # Load the encoder
 # Load the pre-trained model
-model = joblib.load("lr_model.pkl")
+model = joblib.load("model_LR.pkl")
 
 # message_text = "Had your mobile 11 months or more? U R entitled to Update to the latest colour mobiles with camera for Free! Call The Mobile Update Co FREE on 08002986030"
 # # run classification
