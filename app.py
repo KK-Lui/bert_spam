@@ -27,10 +27,10 @@ model = joblib.load("rf_model.pkl")
 # print(X_emb.shape)
 # prediction = model.predict(X_emb)
 # print(message_text, prediction)
-#if prediction[0] == 1:
-# result = "Spam"
-#else:
-# result = "Not Spam"
+# if prediction[0] == 1:
+#  result = "Spam"
+# else:
+#  result = "Not Spam"
 
 
 # === Flask Application Setup ===
