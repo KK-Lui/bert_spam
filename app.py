@@ -16,21 +16,22 @@ url = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/'
 WEBHOOK_URL = os.getenv('WEBHOOK_URL')
 
 # === prepare classifier ===
-encoder = joblib.load("vector.pkl")  # Load the encoder
+encoder = joblib.load("tfidf_vectorizer.pkl")  # Load the encoder
 # Load the pre-trained model
-model = joblib.load("new_lr_model.pkl")
+model = joblib.load("rf_model.pkl")
 
 # message_text = "Had your mobile 11 months or more? U R entitled to Update to the latest colour mobiles with camera for Free! Call The Mobile Update Co FREE on 08002986030"
 # message_text = "Greetings"
 # run classification
 # X_emb = encoder.transform([message_text])
 # print(X_emb.shape)
-# pred = model.predict(X_emb)
-# print(message_text, pred)
-# if pred==[1]:
-#    print('Spam')
-# else:
-#    print('Not Spam')
+# prediction = model.predict(X_emb)
+# print(message_text, prediction)
+#if prediction[0] == 1:
+    result = "Spam"
+else:
+    result = "Not Spam"
+
 
 # === Flask Application Setup ===
 
@@ -85,12 +86,12 @@ def telegram_webhook():
 
         # run classification
         X_emb = encoder.transform([message_text])
-        pred = model.predict(X_emb)
+        prediction = model.predict(X_emb)
 
-        if pred==[0]:
-            result = "Not Spam"
-        else:
+        if prediction[0] == 1:
             result = "Spam"
+        else:
+            result = "Not Spam"
 
         send_url = url + f'sendMessage?parse_mode=markdown&chat_id={chat_id}&text={result}'
         requests.get(send_url)
