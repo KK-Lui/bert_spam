@@ -67,11 +67,6 @@ def telegram_webhook():
     message_text = message.get('text', '')
 
     if message_text.lower() == '/start':
-        # Then set the new webhook so Telegram knows where to send updates
-        set_webhook_url = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/setWebhook?url={WEBHOOK_URL}/webhook'
-        response = requests.post(set_webhook_url, json={'url': WEBHOOK_URL})
-        print(f"Webhook set: {response.json()}")
-
         requests.get(url + f'sendMessage?chat_id={chat_id}&text={"Send me some text: (or type /quit)"}')
         return 'OK', 200
     elif message_text.lower() == "/quit":
